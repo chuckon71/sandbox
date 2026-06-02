@@ -1,0 +1,6 @@
+$exe = "$env:TEMP\spice-guest-tools-latest.exe"
+Invoke-WebRequest `
+  -Uri "https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe" `
+  -OutFile $exe
+
+Start-Process -FilePath $exe -Wait -Verb RunAs
