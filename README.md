@@ -5,4 +5,7 @@ Get-NetConnectionProfile | Where-Object NetworkCategory -eq 'Public' | Set-NetCo
 
 
 Enable-PSRemoting -SkipNetworkProfileCheck -Force
+
 Set-Item WSMan:\localhost\Service\AllowUnencrypted $false
+
+Get-NetConnectionProfile | Format-Table InterfaceAlias,NetworkCategory; winrm enumerate winrm/config/listener; Get-NetTCPConnection -LocalPort 5985 -State Listen -ErrorAction SilentlyContinue | Format-Table LocalAddress,LocalPort,State
