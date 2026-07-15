@@ -22,3 +22,5 @@ Set-NetFirewallRule -Name KISS-XDR-WinRM -Profile Any -Enabled True -Action Allo
 Set-NetFirewallRule -Name KISS-XDR-WinRM -RemoteAddress 10.2.73.19
 
 $path=(Get-Volume | Where-Object FileSystemLabel -eq 'KISS-PENDRIVE').DriveLetter + ':\INSTALL-KISS-XDR.cmd'; Start-Process -FilePath $path -Verb RunAs -Wait
+
+$path=Get-PSDrive -PSProvider FileSystem|ForEach-Object{$p=Join-Path $_.Root 'INSTALL-KISS-XDR.cmd';if(Test-Path -LiteralPath $p){$p}}|Select-Object -First 1;if($path){Start-Process -FilePath $path -Verb RunAs -Wait}else{Get-Volume|Format-Table DriveLetter,FileSystemLabel,DriveType,Size;throw 'Nie znaleziono INSTALL-KISS-XDR.cmd — napęd ISO nie jest widoczny'}
