@@ -18,3 +18,5 @@ $ErrorActionPreference='Stop';Get-NetConnectionProfile|Where-Object NetworkCateg
 
 
 Set-NetFirewallRule -Name KISS-XDR-WinRM -Profile Any -Enabled True -Action Allow -RemoteAddress Any
+
+Set-NetFirewallRule -Name KISS-XDR-WinRM -RemoteAddress 10.2.73.19
